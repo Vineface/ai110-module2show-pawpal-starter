@@ -47,6 +47,14 @@ pip install -r requirements.txt
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
 ```
+Plan for Jerome on 2026-10-19:
+  Medication (10 min, 08:00, priority 1, pending)
+  Feeding (15 min, 08:10, priority 1, pending)
+  Morning walk (30 min, 08:25, priority 2, pending)
+  Could not fit: Grooming (60 min, priority 5)
+```
+
+```
 # e.g.:
 # Daily plan for Biscuit (Golden Retriever):
 #   08:00 — Morning walk (30 min) [priority: high]
@@ -92,3 +100,6 @@ Describe your app in numbered steps so a reader can follow along without watchin
 5. <!-- Add more steps as needed -->
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+
+#Implementation Summary
+Pawpal is a smart pet-care management system. An owner is able to have pets, and each pet has tasks, and a scheduler is the brain that is able to turn those tasks into a plan for the day, so that there is no conflicts in time. The logic behind the system is in pawpal_systems.py, along with a demo in main.py and two simple tests in tests/test_pawpal.py that verifies task completion and addition. Finally there is a class diagram in diagrams/uml.mmd that shows the classes and their attributes as well as the relationship between classes. Task class holds an activity and includes the title,description,duration,start time, priority, date, frequency and completion status. Pet class stores a pet's details and its list of tasks. Owner class manages multiple pets, and can add and remove pets and retrieves every tasks from every pet an owner owns. Scheduler classs.

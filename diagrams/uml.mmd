@@ -3,17 +3,23 @@ classDiagram
         +String name
         +List~String~ preferences
         +List~Pet~ pets
-        +add_pet(name: String, species: String) Pet
+        +add_pet(pet: Pet) void
         +remove_pet(pet: Pet) void
+        +get_all_tasks() List~Task~
     }
 
     class Pet {
         +String name
         +String species
         +List~String~ needs
+        +List~Task~ tasks
+        +String pet_id
         +retrieve_needs() List~String~
         +add_needs(need: String) void
         +remove_need(need: String) void
+        +add_task(task: Task) void
+        +remove_task(task: Task) void
+        +pending_tasks() List~Task~
     }
 
     class Task {
@@ -21,20 +27,32 @@ classDiagram
         +int duration
         +time start_time
         +int priority
+        +date task_date
+        +String recurrence
+        +start_sort_key() tuple
+        +String description
+        +bool completed
         +update_priority(priority: int) void
-        +add_tasks() void
-        +remove_task() void
+        +occurs_on(day: date) bool
+        +mark_complete() Task
+        +next_occurrence() Task
     }
 
     class Scheduler {
-        +List~Task~ daily_tasks
-        +List~time~ available_times
+        +Owner owner
+        +List~Tuple~time, time~~ available_times
+        +date schedule_date
+        +List~Task~ scheduled_tasks
+        +List~Task~ unscheduled_tasks
+        +daily_tasks() List~Task~
         +generate_schedule() List~Task~
         +prioritize_tasks() List~Task~
-        +reschedule_task(task: Task, new_time: time) void
+        +reschedule_task(task: Task, new_time: time) bool
+        +explain_schedule() String
     }
 
     Owner "1" o-- "0..*" Pet : owns
     Pet "1" --> "0..*" Task : needs care via
-    Scheduler "1" o-- "0..*" Task : schedules
-    Scheduler ..> Owner : uses preferences of
+    Scheduler "1" --> "1" Owner : reads tasks via get_all_tasks()
+    Scheduler ..> Task : schedules
+    note for Scheduler "generate_schedule() calls prioritize_tasks(); prioritize_tasks() returns a new sorted list"
