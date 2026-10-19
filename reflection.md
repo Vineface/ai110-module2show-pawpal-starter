@@ -5,6 +5,7 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+it should include a core action that adds pet tasks, another action for producing a daily schedule and allow editing of tasks.Perhaps another action could be to check time availability and priority of tasks.
 - What classes did you include, and what responsibilities did you assign to each?
 
 **b. Design changes**
